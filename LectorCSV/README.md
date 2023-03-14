@@ -70,7 +70,7 @@ Tengan presente que el tag **"\<mainClass\>"** debe tener la ruta de su clase Ma
 Por último, van a ver que en el ServicioContratado.java, donde tenemos definidos los objetos que queremos obtener a partir del archivo hay algunas anotaciones
 
 ```
-public class subscriptionModel {
+public class ServicioContratado {
     @CsvBindByPosition(position = 0)
     private String sitio;
     @CsvBindByPosition(position = 1)
