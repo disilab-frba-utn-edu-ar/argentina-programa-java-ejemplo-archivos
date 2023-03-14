@@ -1,13 +1,11 @@
 package modelo;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 import com.opencsv.bean.CsvBindByPosition;
 import com.opencsv.bean.CsvDate;
 
-public class subscriptionModel {
+public class ServicioContratado {
     @CsvBindByPosition(position = 0)
     private String sitio;
     @CsvBindByPosition(position = 1)
@@ -20,14 +18,6 @@ public class subscriptionModel {
     @CsvBindByPosition(position = 4)
     private String estado;
 
-    public subscriptionModel(){};
-    public subscriptionModel(String sitio, String servicioDeContenido, Integer idServicioDeContenido, LocalDate fechaDeAlta, String estado){
-        this.sitio = sitio;
-        this.servicioDeContenido = servicioDeContenido;
-        this.idServicioDeContenido = idServicioDeContenido;
-        this. fechaDeAlta= fechaDeAlta;
-        this.estado = estado;
-    }
 
     public String getSitio() {
         return sitio;

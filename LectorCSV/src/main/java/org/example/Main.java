@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.opencsv.bean.CsvToBeanBuilder;
-import modelo.subscriptionModel;
+import modelo.ServicioContratado;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,19 +14,18 @@ public class Main {
             System.exit(88);
         }
 
-        List listaDeSuscripciones;
+        List <ServicioContratado> listaDeSuscripciones;
         try {
             // En esta primera línea definimos el archivos que va a ingresar
-              listaDeSuscripciones = new CsvToBeanBuilder(new FileReader(args[0]))
+           listaDeSuscripciones = new CsvToBeanBuilder(new FileReader(args[0]))
                       // Es necesario definir el tipo de dato que va a generar el objeto que estamos queriendo parsear a partir del CSV
-                    .withType(subscriptionModel.class)
+                    .withType(ServicioContratado.class)
                     .build()
                     .parse();
 
               //El resultado de este método nos da una lita del objetos
 
-            for (Object listaDeSuscripcione : listaDeSuscripciones) {
-                subscriptionModel suscripcion = (subscriptionModel) listaDeSuscripcione;
+            for (ServicioContratado suscripcion : listaDeSuscripciones) {
                 System.out.println(suscripcion.getSitio() + ";" + suscripcion.getServicioDeContenido() + ";" +
                         suscripcion.getIdServicioDeContenido() + ";" + suscripcion.getFechaDeAlta() + ";" + suscripcion.getEstado());
             }
