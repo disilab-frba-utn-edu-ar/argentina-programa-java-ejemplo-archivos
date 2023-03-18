@@ -1,10 +1,15 @@
 package org.example;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.opencsv.bean.CsvToBeanBuilder;
-import modelo.ServicioContratado;
+import modelo.ArchivoServiciosContratados;
+import modelo.LectorArchivos;
+import modelo.Servicio;
+import modelo.Suscripcion;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,23 +19,28 @@ public class Main {
             System.exit(88);
         }
 
-        List <ServicioContratado> listaDeSuscripciones;
-        try {
-            // En esta primera línea definimos el archivos que va a ingresar
-           listaDeSuscripciones = new CsvToBeanBuilder(new FileReader(args[0]))
-                      // Es necesario definir el tipo de dato que va a generar el objeto que estamos queriendo parsear a partir del CSV
-                    .withType(ServicioContratado.class)
-                    .build()
-                    .parse();
+        LectorArchivos lectorArchivos = new LectorArchivos(args[0]);
 
-              //El resultado de este método nos da una lita del objetos
+        //Obtengo todas las líneas del archivo CSV
+        lectorArchivos.parsearArchivo();
 
-            for (ServicioContratado suscripcion : listaDeSuscripciones) {
-                System.out.println(suscripcion.getSitio() + ";" + suscripcion.getServicioDeContenido() + ";" +
-                        suscripcion.getIdServicioDeContenido() + ";" + suscripcion.getFechaDeAlta() + ";" + suscripcion.getEstado());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        //Genero una lista con todos los distintos servicios que hay en el archivo CSV
+        ArrayList<Servicio> servicios = lectorArchivos.listarServicios();
+
+        //Genero las suscripciones, que son un servicio contratado en una fecha, con un estado y un precio
+        ArrayList<Suscripcion> suscripciones = lectorArchivos.listarSuscripciones(servicios);
+
+        for (Suscripcion cadaSuscripcion : suscripciones){
+            System.out.println(
+                    "Estado de la suscripción: " + cadaSuscripcion .getEstado() + "\n" +
+                            "Fecha de Alta: " + cadaSuscripcion.getFechaDeAlta() + "\n" +
+                            "Precio de la suscripción " + cadaSuscripcion.getPrecio() + "\n" +
+                            "Id Servicio suscripto: " + cadaSuscripcion.getServicio().getIdentificadorServicio() + "\n" +
+                            "Nombre Servicio suscripto: " + cadaSuscripcion.getServicio().getNombreServicio() + "\n" +
+                            "-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"
+            );
+        }
+
     }
-}
+
 }
