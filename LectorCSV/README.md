@@ -2,7 +2,7 @@
 
 En el Main de este proyecto van a ver una forma de "parsear" la ruta de un archivo .CSV que se ingrese por argumento en la ejecucción del programa
 
-Pero, ¿Que es Parsear?
+Pero, ¿Qué es Parsear?
 > Proceso de analizar una secuencia de símbolos a fin de determinar su estructura gramatical definida. También llamado análisis de sintaxis.
 Un parseador (parser) es un programa de computación que lleva a cabo esta tarea. El parseo transforma una entrada de texto en una estructura de datos (usualmente un árbol) que es apropiada para ser procesada.
 Generalmente los parseadores primero identifican los símbolos de la entrada y luego construyen el árbol de parseo.
